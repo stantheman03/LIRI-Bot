@@ -1,10 +1,12 @@
 // global varibales for each function
 var spotify  = '';
 var spotifyAPI = require('node-spotify-api');
+var bKeys = require('./keys.js')
 var sKeys = require('./keys.js');
 var fs = require('fs');
 var request = require('request');
 var moment = require('moment')
+// var bands = key.bands.key
 
 var command = process.argv[2]
 var userInput = process.argv[3]
@@ -44,7 +46,7 @@ function spotifyThis(songName) {
     console.log(spotify)
 }
 if(songName === null){
-    songName = 'The Sign Ace of Base'
+    songName = 'The Sign Ace of Base';
 }
 var newSong = songName;
 
@@ -95,7 +97,10 @@ function movieThis(movieName) {
 function concertThis(bandName){
     request('https://rest.bandsintown.com/artists/' + bandName + '/events?app_id=codingbootcamp', function(error, response, body){
         if(!error && response.statusCode === 200){
-            var result = JSON.parse(body)[0]
+            console.log(response);
+            console.log(body);
+            var result = JSON.parse(body)
+            console.log(result)
             console.log('--------------------------------------------------------')
             console.log('Name of the Venue ' + result.venue.name);
             console.log('Venue location ' + result.venue.city);
